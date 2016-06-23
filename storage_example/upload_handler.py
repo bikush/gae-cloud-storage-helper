@@ -53,7 +53,7 @@ class UploadHandler(webapp2.RequestHandler):
         """
         Places the given file in the cloud storage when online, or development
         blobstore when local. Accepts files whose name ends with png/jpg/jpeg
-        and are less than 512KB.
+        and are less than 1MB.
         """  
         
         path = CloudStorageHelper.read_path_from_handler_args(*args) 
@@ -74,8 +74,8 @@ class UploadHandler(webapp2.RequestHandler):
             
         content_size = len(data)
         
-        # file size 512KB
-        if content_type != None and content_size < 512*1024 and content_size > 0:                
+        # file size 1MB
+        if content_type != None and content_size < 1024*1024 and content_size > 0:                
             print "received data ", the_file_name, ", length ", str(len(data)), ", starts ", data[:100]
             CloudStorageHelper.create_file(path, content_type, data)
         
