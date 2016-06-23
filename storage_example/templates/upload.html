@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Uplodgsdgad Test</title>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Upload Test</h1>
+        </div>
+    
+    </header>
+    
+    <hr>
+    <div>
+    {% if file_url != None and file_url|length() > 0 %}
+        <img src="{{ file_url }}" height="256"> 
+        <div><span>Current file:</span><a href="{{ file_url }}">{{ file_url }}</a></div>        
+    {% else %}
+        Nothing to see here, upload an image.
+    {% endif %}
+    </div>
+    <hr>
+    <form id="upload_form" method="post" action="{{ url_update }}" enctype="multipart/form-data">
+       <div><span>Upload:</span><input type="file" name="file" accept="image/*"></div>
+        <div><input type="submit" value="Upload"></div>  
+    </form>
+</html>

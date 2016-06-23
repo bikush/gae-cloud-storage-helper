@@ -1,0 +1,18 @@
+application: cloud-storage-test-1350
+runtime: python27
+api_version: 1
+threadsafe: true
+
+
+env_variables:
+  BUCKET_NAME: cst-003644
+
+
+libraries:
+- name: jinja2
+  version: latest
+
+
+handlers: 
+- url: /.*
+  script: storage_example.main.app
