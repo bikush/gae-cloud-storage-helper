@@ -18,7 +18,6 @@ class CloudStorageHandler(webapp2.RequestHandler):
         """
                 
         path = CloudStorageHelper.read_path_from_handler_args(*args)
-        storage_url = CloudStorageHandler.get_storage_url_base(self.app.config)
                 
         if CloudStorageHelper.is_local:
             content = CloudStorageHelper.read_file(path)
@@ -30,16 +29,6 @@ class CloudStorageHandler(webapp2.RequestHandler):
                 self.response.headers['Content-Type'] = 'image/jpeg'        
                 self.response.write( content );
         else:
+            storage_url = CloudStorageHelper.get_storage_url_base(self.app.config)
             self.redirect( CloudStorageHelper.create_complete_url(path, local_url=storage_url) )
        
-        
-    @classmethod
-    def get_storage_url_base(cls, config):
-        """
-        Storage url base if written in request handlers app.config. If not present
-        this method returns the default value.
-        """
-        storage_url = CloudStorageHelper.default_local_url
-        if config != None:
-            storage_url = config.get('storage_url', storage_url)
-        return storage_url

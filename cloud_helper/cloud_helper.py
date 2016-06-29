@@ -100,6 +100,20 @@ class CloudStorageHelper():
     
     
     @classmethod
+    def get_storage_url_base(cls, config):
+        """
+        Returns storage url base. First checks the given config object (ideally 
+        it is the app.config object). If there is no config object this method 
+        returns the default value.
+        Config storage url key is 'storage_url'.
+        """
+        storage_url = cls.default_local_url
+        if config != None:
+            storage_url = config.get('storage_url', storage_url)
+        return storage_url
+    
+    
+    @classmethod
     def read_path_from_handler_args(cls, *args):
         """
         Helper method for webapp handlers. Trims leading / from arguments

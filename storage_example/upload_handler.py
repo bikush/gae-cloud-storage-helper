@@ -40,7 +40,7 @@ class UploadHandler(webapp2.RequestHandler):
             self.render(URL_UPLOAD_HTML)
         else:
             file_data = CloudStorageHelper.read_file(path)
-            storage_url = CloudStorageHandler.get_storage_url_base(self.app.config)
+            storage_url = CloudStorageHelper.get_storage_url_base(self.app.config)
                 
             jinja_settings = { "url_update" : (URL_UPLOAD + "/" + path) }
             if len(file_data) > 0:
